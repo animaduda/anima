@@ -360,6 +360,8 @@
         return;
       }
 
+      $('#goToTableBtn').text('Salvando...');
+
       const userId = localStorage.getItem("anima-user");
       const thought = schemas;
 
@@ -372,11 +374,13 @@
         data: JSON.stringify(_data),
         success: function (data) {
 
+          $('#goToTableBtn').text('Ir para a tabela');
           localStorage.setItem("anima-user-response", data);
           window.location.href = "tabela.html";
         },
         error: function (message) {
-
+          
+          $('#goToTableBtn').text('Ir para a tabela');
           $('#message-error').text("Erro ao salvar.");
           $('#message-error').show();
         }
