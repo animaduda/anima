@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Tabela Psicológica</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e0d1ff;
+            /* Roxo claro para o fundo */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 60%;
+            height: 100%;
+            padding: 20px 0;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .div-table {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            overflow-y: auto;
+            background-color: #e0d1ff;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #7c3aed;
+            /* Roxo mais escuro para os cabeçalhos */
+            color: white;
+            text-align: left;
+        }
+
+        td {
+            background-color: #f0eaff;
+            /* Roxo mais claro para as células */
+            white-space: pre-wrap;
+            word-break: break-all;
+            vertical-align: top;
+        }
+
+        .continue-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #7c3aed;
+            /* Roxo mais escuro para o botão */
+            font-size: 18px;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: flex;
+            align-self: flex-start;
+        }
+
+        .continue-button:hover {
+            background-color: #7c3aed;
+            /* Roxo mais escuro com matiz mais claro para o hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <button class="continue-button" type="button" onclick="goToHome()">Voltar pra Início</button>
+
+        <div class="div-table">
+        <table id="table-response">
+            <thead>
+                <tr>
+                    <th style="width: 12%;">Nome</th>
+                    <th style="width: 12%;">Email</th>
+                    <th style="width: 16%;">Pensamentos</th>
+                    <th style="width: 15%;">Situação</th>
+                    <th style="width: 15%;">Pensamento Automático</th>
+                    <th style="width: 15%;">Pensamento Alternativo</th>
+                    <th style="width: 15%;">Conclusão</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                        <td class="editable-cell"></td>
+                        <td class="editable-cell"></td>
+                        <td class="editable-cell"></td>
+                        <td class="editable-cell"></td>
+                        <td class="editable-cell"></td>
+                        <td class="editable-cell"></td>
+                        <td class="editable-cell"></td>
+                    </tr> -->
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            $.ajax({
+                //url: "https://animaapi-dtb3fxecdrbxdche.brazilsouth-01.azurewebsites.net/User/Response",
+                url: "https://localhost:44385/User/Response",
+                type: "GET",
+                contentType: "application/json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    data.forEach(item => {
+
+                        $('#table-response tbody').
+                            append(
+                                '<tr>' +
+                                `<td>${item.user.name}</td>` +
+                                `<td>${item.user.email}</td>` +
+                                `<td>${item.thought}</td>` +
+                                `<td>${item.situation}</td>` +
+                                `<td>${item.automaticThinking}</td>` +
+                                `<td>${item.alternativeThinking}</td>` +
+                                `<td>${item.conclusion}</td>` +
+                                '</tr>');
+                    });
+                },
+                error: function (message) {
+
+                    $('#message-error').text("Erro ao salvar.");
+                    $('#message-error').show();
+                }
+            });
+        });
+
+        function goToHome() {
+            window.location.href = "entrada.html";
+        }
+
+    </script>
+</body>
+
+</html>
