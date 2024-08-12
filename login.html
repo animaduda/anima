@@ -120,7 +120,7 @@
     <!-- Tela de Login -->
     <section id="login">
         <h2>Entre no Ânima!</h2>
-        <form id="login-form" action="login_success.html" method="post">
+        <form id="login-form" action="login_success.html" onsubmit="login(); return false;" method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             <label for="senha">Senha:</label>
@@ -129,7 +129,7 @@
             <span id="message-error" hidden>
             </span>
 
-            <button id="btn-login" type="button" onclick="login()">Entrar</button>
+            <button id="btn-login" type="submit">Entrar</button>
         </form>
         <div class="signin-link">
             Não tem uma conta? <a href="signin.html">Sign In</a>
