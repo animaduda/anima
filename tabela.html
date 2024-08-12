@@ -22,7 +22,7 @@
     }
 
     .container {
-      width: 60%;
+      width: 50%;
       padding: 20px;
       background-color: #fff;
       border-radius: 20px;
@@ -104,12 +104,66 @@
       background-color: #7c3aed;
       /* Roxo mais escuro com matiz mais claro para o hover */
     }
+
+    label {
+      display: block;
+      color: #7c3aed;
+      /* Roxo mais escuro para o rótulo */
+      font-size: 18px;
+    }
+
+    small {
+      color: #7c3aed;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #7c3aed;
+      /* Roxo mais escuro para a borda */
+      border-radius: 5px;
+      width: calc(100% - 24px);
+      margin-bottom: 15px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      body {
+        overflow: auto;
+        width: fit-content;
+        height: 100%;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <table id="table-response">
+
+    <div>
+      <label for="situation">Situação:</label>
+      <small>Contexto específico em que um comportamento ou evento ocorre</small>
+      <textarea id="situation" name="situation" rows="4"></textarea>
+      
+      <label for="automatic">Pensamento Automático:</label>
+      <small>Resposta rápida e involuntária que ocorre em resposta a uma situação</small>
+      <textarea id="automatic" name="automatic" rows="4"></textarea>
+      
+      <label for="alternative">Pensamento Alternativo:</label>
+      <small>Abordagem consciente e deliberada para substituir pensamentos automáticos por outras perspectivas mais realista</small>
+      <textarea id="alternative" name="alternative" rows="4"></textarea>
+      
+      <label for="conclusion">Conclusão:</label>
+      <small>Fechamento que resume e encerra um assunto, apresentando uma visão final</small>
+      <textarea id="conclusion" name="conclusion" rows="4"></textarea>
+    </div>
+
+    <!-- <table id="table-response">
       <thead>
         <tr>
           <th data-definition="situation">Situação</th>
@@ -126,7 +180,7 @@
           <td contenteditable="true" class="editable-cell"></td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
     <div class="definitions-container">
       <div class="definition" id="situation-definition">
@@ -149,37 +203,37 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
 
-      const definitionSpans = document.querySelectorAll('th');
-      const definitions = {
-        situation: document.getElementById('situation-definition'),
-        automatic: document.getElementById('automatic-definition'),
-        alternative: document.getElementById('alternative-definition'),
-        conclusion: document.getElementById('conclusion-definition')
-      };
+      // const definitionSpans = document.querySelectorAll('th');
+      // const definitions = {
+      //   situation: document.getElementById('situation-definition'),
+      //   automatic: document.getElementById('automatic-definition'),
+      //   alternative: document.getElementById('alternative-definition'),
+      //   conclusion: document.getElementById('conclusion-definition')
+      // };
 
-      definitionSpans.forEach(th => {
-        th.addEventListener('click', (event) => {
-          const definitionId = event.target.dataset.definition;
-          const definition = definitions[definitionId];
-          if (definition.style.display === 'block') {
-            definition.style.display = 'none';
-          } else {
-            Object.values(definitions).forEach(def => {
-              def.style.display = 'none';
-            });
-            definition.style.display = 'block';
-          }
-        });
-      });
+      // definitionSpans.forEach(th => {
+      //   th.addEventListener('click', (event) => {
+      //     const definitionId = event.target.dataset.definition;
+      //     const definition = definitions[definitionId];
+      //     if (definition.style.display === 'block') {
+      //       definition.style.display = 'none';
+      //     } else {
+      //       Object.values(definitions).forEach(def => {
+      //         def.style.display = 'none';
+      //       });
+      //       definition.style.display = 'block';
+      //     }
+      //   });
+      // });
 
-      const editableCells = document.querySelectorAll('.editable-cell');
+      // const editableCells = document.querySelectorAll('.editable-cell');
 
-      editableCells.forEach(cell => {
-        cell.addEventListener('input', () => {
-          cell.style.height = 'auto';
-          cell.style.height = (cell.scrollHeight) + 'px';
-        });
-      });
+      // editableCells.forEach(cell => {
+      //   cell.addEventListener('input', () => {
+      //     cell.style.height = 'auto';
+      //     cell.style.height = (cell.scrollHeight) + 'px';
+      //   });
+      // });
 
     });
 
@@ -187,11 +241,17 @@
 
       var table = document.getElementById('table-response');
 
+      // const id = localStorage.getItem("anima-user-response");
+      // const situation = table.rows[1].cells[0].innerText;
+      // const automaticThinking = table.rows[1].cells[1].innerText;
+      // const alternativeThinking = table.rows[1].cells[2].innerText;
+      // const conclusion = table.rows[1].cells[3].innerText;
+
       const id = localStorage.getItem("anima-user-response");
-      const situation = table.rows[1].cells[0].innerText;
-      const automaticThinking = table.rows[1].cells[1].innerText;
-      const alternativeThinking = table.rows[1].cells[2].innerText;
-      const conclusion = table.rows[1].cells[3].innerText;
+      const situation = $('#situation').val();
+      const automaticThinking = $('#automatic').val();
+      const alternativeThinking = $('#alternative').val();
+      const conclusion = $('#conclusion').val();
 
       var _data = { id, situation, automaticThinking, alternativeThinking, conclusion };
 
