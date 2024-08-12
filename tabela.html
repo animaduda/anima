@@ -85,7 +85,7 @@
     }
 
 
-    .continue-button {
+    #continue-button {
       display: inline-block;
       margin-top: 20px;
       padding: 8px 16px;
@@ -100,7 +100,7 @@
       transition: background-color 0.3s;
     }
 
-    .continue-button:hover {
+    #continue-button:hover {
       background-color: #7c3aed;
       /* Roxo mais escuro com matiz mais claro para o hover */
     }
@@ -198,7 +198,7 @@
       </div>
     </div>
 
-    <button class="continue-button" type="button" onclick="goToTchau()">Concluir Análise</button>
+    <button id="continue-button" type="button" onclick="goToTchau()">Concluir Análise</button>
   </div>
 
   <script>
@@ -254,9 +254,9 @@
       const alternativeThinking = $('#alternative').val();
       const conclusion = $('#conclusion').val();
 
-      var _data = { id, situation, automaticThinking, alternativeThinking, conclusion };
+      $('#continue-button').text('Salvando...');
 
-      console.log(_data);
+      var _data = { id, situation, automaticThinking, alternativeThinking, conclusion };
 
       $.ajax({
         url: "https://animaapi-dtb3fxecdrbxdche.brazilsouth-01.azurewebsites.net/User/Response",
@@ -265,10 +265,12 @@
         data: JSON.stringify(_data),
         success: function (data) {
 
+          $('#continue-button').text('Concluir Análise');
           window.location.href = "tchau.html";
         },
         error: function (message) {
 
+          $('#continue-button').text('Concluir Análise');
           $('#message-error').text("Usuário não encontrado.");
           $('#message-error').show();
         }
