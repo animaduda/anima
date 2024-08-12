@@ -100,6 +100,13 @@
             color: rgb(184, 16, 16);
             margin: 10px 0;
         }
+
+        @media only screen and (max-width: 600px) {
+
+            #signin-form {
+                min-width: unset;
+            }
+        }
     </style>
 </head>
 
@@ -107,7 +114,8 @@
     <!-- Tela de Cadastro -->
     <section id="signin">
         <h2>Cadastre-se no Ânima!</h2>
-        <form id="signin-form" action="signin_success.html" onsubmit="create(); return false;" method="post" autocomplete="off">
+        <form id="signin-form" action="signin_success.html" onsubmit="create(); return false;" method="post"
+            autocomplete="off">
             <label for="nome">Nome completo:</label>
             <input type="text" id="nome" name="nome" required
                 oninvalid="this.setCustomValidity('Informe o nome completo.')" oninput="setCustomValidity('')">
