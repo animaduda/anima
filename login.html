@@ -35,6 +35,10 @@
             margin-bottom: 20px;
         }
 
+        #login-form {
+            min-width: 350px;
+        }
+
         label {
             display: block;
             margin-bottom: 10px;
@@ -118,7 +122,7 @@
             <span id="message-error" hidden>
             </span>
 
-            <button type="button" onclick="login()">Entrar</button>
+            <button id="btn-login" type="button" onclick="login()">Entrar</button>
         </form>
         <div class="signin-link">
             Não tem uma conta? <a href="signin.html">Sign In</a>
@@ -127,6 +131,8 @@
 
     <script>
         function login() {
+
+            $('#btn-login').text('entrando...');
 
             const email = $('#email').val();
             const password = $('#senha').val();
@@ -140,11 +146,13 @@
                 data: JSON.stringify(_data),
                 success: function (data) {
 
+                    $('#btn-login').text('Entrar');
                     localStorage.setItem("anima-user", data.id);
                     document.getElementById("login-form").submit();
                 },
                 error: function (message) {
 
+                    $('#btn-login').text('Entrar');
                     $('#message-error').text("Usuário não encontrado.");
                     $('#message-error').show();
                 }
