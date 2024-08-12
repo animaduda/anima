@@ -14,7 +14,7 @@
             /* Roxo claro para o fundo */
             color: #333;
             margin: 0;
-            padding: 0;
+            padding: 20px 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,8 +23,6 @@
         .container {
             width: 60%;
             height: 100%;
-            padding: 20px 0;
-            border-radius: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -86,6 +84,30 @@
             background-color: #7c3aed;
             /* Roxo mais escuro com matiz mais claro para o hover */
         }
+
+        @media only screen and (max-width: 600px) {
+
+            body {
+                width: calc(100% - 20px);
+                padding: 20px 10px;
+            }
+
+            .container {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .div-table {
+                overflow: auto;
+                height: unset;
+            }
+
+            table {
+                width: 1200px;
+                border-collapse: collapse;
+                background-color: #e0d1ff;
+            }
+        }
     </style>
 </head>
 
@@ -95,22 +117,22 @@
         <button class="continue-button" type="button" onclick="goToHome()">Voltar pra Início</button>
 
         <div class="div-table">
-        <table id="table-response">
-            <thead>
-                <tr>
-                    <th style="width: 12%;">Nome</th>
-                    <th style="width: 12%;">Email</th>
-                    <th style="width: 16%;">Pensamentos</th>
-                    <th style="width: 15%;">Situação</th>
-                    <th style="width: 15%;">Pensamento Automático</th>
-                    <th style="width: 15%;">Pensamento Alternativo</th>
-                    <th style="width: 15%;">Conclusão</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+            <table id="table-response">
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">Nome</th>
+                        <th style="width: 12%;">Email</th>
+                        <th style="width: 16%;">Pensamentos</th>
+                        <th style="width: 15%;">Situação</th>
+                        <th style="width: 15%;">Pensamento Automático</th>
+                        <th style="width: 15%;">Pensamento Alternativo</th>
+                        <th style="width: 15%;">Conclusão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
