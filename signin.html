@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <title>Sign In</title>
     <style>
         body {
@@ -12,7 +13,7 @@
             background-color: #e0d1ff;
             /* Roxo claro para o fundo */
             margin: 0;
-            padding: 0;
+            padding: 0 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,7 +24,7 @@
             text-align: center;
             background-color: #ffffff;
             /* Branco para o fundo do conteúdo */
-            padding: 30px;
+            padding: 24px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -51,7 +52,7 @@
             border: 1px solid #7c3aed;
             /* Roxo mais escuro para a borda */
             border-radius: 5px;
-            width: 100%;
+            width: calc(100% - 24px);
             margin-bottom: 15px;
         }
 
@@ -102,18 +103,21 @@
     <!-- Tela de Cadastro -->
     <section id="signin">
         <h2>Cadastre-se no Ânima!</h2>
-        <form id="signin-form" action="signin_success.html">
+        <form id="signin-form" action="signin_success.html" onsubmit="create()">
             <label for="nome">Nome completo:</label>
-            <input type="text" id="nome" name="nome" required>
+            <input type="text" id="nome" name="nome" required
+                oninvalid="this.setCustomValidity('Informe o nome completo.')" oninput="setCustomValidity('')">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required
+                oninvalid="this.setCustomValidity('Informe um email válido.')" oninput="setCustomValidity('')">
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+            <input type="password" id="senha" name="senha" required
+                oninvalid="this.setCustomValidity('Informe uma senha.')" oninput="setCustomValidity('')">
 
             <span id="message-error" hidden>
             </span>
 
-            <button id="btn-submit" type="button" onclick="create()">Criar Conta</button>
+            <button id="btn-submit" type="submit">Criar Conta</button>
         </form>
         <div class="login-link">
             Já tem uma conta? <a href="login.html">Log In</a>
@@ -121,7 +125,16 @@
     </section>
 
     <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+        });
+
         function create() {
+
+            if (!$("#signin-form").valid()) {
+                return;
+            }
 
             const name = $('#nome').val();
             const email = $('#email').val();
@@ -142,7 +155,7 @@
 
                     if (message.status === 409) {
                         $('#message-error').text("Usuário já criado.");
-                    } else { 
+                    } else {
                         $('#message-error').text("Erro ao salvar usuário.");
                     }
 
