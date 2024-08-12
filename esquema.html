@@ -104,9 +104,6 @@
     .definition {
       margin-top: 10px;
       padding: 10px;
-      background-color: #7c3aed;
-      /* Roxo mais escuro para o fundo da definição */
-      border-radius: 4px;
       display: none;
       /* Alterado para inicialmente oculto */
       color: #fff;
@@ -119,10 +116,14 @@
     }
 
     #definitions {
+
       overflow-y: auto;
       /* Nova para adicionar scroll caso necessário */
       max-height: 400px;
       /* Nova para limitar a altura */
+      background-color: #7c3aed;
+      /* Roxo mais escuro para o fundo da definição */
+      border-radius: 4px;
     }
 
     #goToTableBtn {
@@ -147,6 +148,38 @@
     #message-error {
       color: rgb(184, 16, 16);
       margin: 10px 0;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+      body {
+        padding: 20px;
+        width: 100vw;
+        height: 100%;
+      }
+
+      #container {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
+      }
+
+      #schemaForm {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
+
+      #meanings {
+        width: 100%;
+        min-height: 120px;
+      }
+
+      #definitions {
+        margin-bottom: 40px;
+      }
     }
   </style>
 </head>
@@ -316,8 +349,6 @@
       });
 
       localStorage.setItem("anima-user-response", '');
-
-      console.log(localStorage.getItem("anima-user-response"));
     });
 
     function goToTable() {
