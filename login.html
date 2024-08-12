@@ -120,7 +120,7 @@
     <!-- Tela de Login -->
     <section id="login">
         <h2>Entre no Ânima!</h2>
-        <form id="login-form" action="login_success.html" onsubmit="login(); return false;">
+        <form id="login-form" onsubmit="login(); return false;">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             <label for="senha">Senha:</label>
@@ -155,7 +155,8 @@
 
                     $('#btn-login').text('Entrar');
                     localStorage.setItem("anima-user", data.id);
-                    document.getElementById("login-form").submit();
+                    //document.getElementById("login-form").submit();
+                    window.location.href = "login_success.html";
                 },
                 error: function (message) {
 
